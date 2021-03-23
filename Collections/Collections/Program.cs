@@ -7,11 +7,78 @@ namespace Collections
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"Please input your grades with a space between each one");
-            string grades = Console.ReadLine();
+            List<double> grades = new List<double>();
+            Dictionary<double, int> examGrades = new Dictionary<double, int>();
 
-            List<double> studentGrades = new List<double>();
-            string[] pieces = 
+            string answer;
+            
+            do
+            {
+                Console.WriteLine("Please enter your exam grade. >>");
+                double grade = Convert.ToDouble(Console.ReadLine());
+
+                grades.Add(grade);
+
+                if (examGrades.ContainsKey(grade) == false)
+                {
+                    examGrades.Add(grade, 1);
+                }
+                else
+                {
+                    examGrades[grade] = examGrades[grade] + 1;
+                }
+
+                Console.WriteLine("Do you have another grade to enter? Yes or No.");
+                answer = Console.ReadLine();
+            } while (answer.ToLower()[0] == 'y');
+
+            double min = grades[0];
+            double max = grades[0];
+            double sum = 0;
+            int maxOccurences = 0;
+            double mode = 0;
+   
+            foreach  (double grade in grades)
+            {
+                if (grade < min)
+                {
+                    min = grade;
+                }
+                if (grade > max)
+                {
+                    max = grade;
+                }
+
+                sum = sum + grade;
+            }
+
+                foreach (double key in examGrades.Keys)
+            {
+                double grade = key;
+                if (examGrades[grade] > maxOccurences)
+                {
+                    maxOccurences = examGrades[grade];
+                    mode = key;
+                }
+            }
+            foreach (double key in examGrades.Keys)
+            {
+                double grade = key;
+                if (examGrades[grade] == maxOccurences)
+                {
+                    Console.WriteLine($"The grade that appears the most times is {grade} x {maxOccurences}.");
+                }
+            }
+
+            Console.WriteLine($"Your minimum is {min.ToString("N2")}");
+            Console.WriteLine($"Your maximum is {max.ToString("N2")}");
+            Console.WriteLine($"Your average is {sum/grades.Count}");
+            Console.WriteLine($"Your mode is {mode.ToString("N2")}");
+
+            /*foreach (double grade in grades) //This will give the grades out in a list
+            {
+                Console.WriteLine(grade);
+            }*/
         }
     }
 }
