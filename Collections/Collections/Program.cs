@@ -34,11 +34,11 @@ namespace Collections
 
             double min = grades[0];
             double max = grades[0];
-            double sum = 0;
+            double sum = 0; //accumulator to add all of our #'s
             int maxOccurences = 0;
             double mode = 0;
-   
-            foreach  (double grade in grades)
+
+            foreach (double grade in grades)
             {
                 if (grade < min)
                 {
@@ -49,7 +49,7 @@ namespace Collections
                     max = grade;
                 }
 
-                sum = sum + grade;
+                sum = sum + grade / grades.Count;
             }
 
                 foreach (double key in examGrades.Keys)
@@ -72,7 +72,7 @@ namespace Collections
 
             Console.WriteLine($"Your minimum is {min.ToString("N2")}");
             Console.WriteLine($"Your maximum is {max.ToString("N2")}");
-            Console.WriteLine($"Your average is {sum/grades.Count}");
+            Console.WriteLine($"Your average is {sum.ToString("N2")}");
             Console.WriteLine($"Your mode is {mode.ToString("N2")}");
 
             /*foreach (double grade in grades) //This will give the grades out in a list
